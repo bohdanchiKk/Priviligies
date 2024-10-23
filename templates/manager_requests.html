@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Privilege Requests - Manager</title>
+</head>
+<body>
+    <h1>Privilege Requests - Manager Dashboard</h1>
+    <h2>Pending Requests</h2>
+    <table border="1">
+        <tr>
+            <th>Privilege ID</th>
+            <th>Privilege Name</th>
+            <th>Requested By (User ID)</th>
+            <th>Actions</th>
+        </tr>
+        {% for request in requests %}
+        <tr>
+            <td>{{ request.privilege_id }}</td>
+            <td>{{ request.privilege_name }}</td>
+            <td>{{ request.requested_by }}</td>
+            <td>
+                <form action="{{ url_for('approve_privilege') }}" method="post" style="display:inline;">
+                    <input type="hidden" name="privilege_id" value="{{ request.privilege_id }}">
+                    <button type="submit" name="action" value="accept">Accept</button>
+                </form>
+                <form action="{{ url_for('approve_privilege') }}" method="post" style="display:inline;">
+                    <input type="hidden" name="privilege_id" value="{{ request.privilege_id }}">
+                    <button type="submit" name="action" value="decline">Decline</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Back to Login</a>
+</body>
+</html>

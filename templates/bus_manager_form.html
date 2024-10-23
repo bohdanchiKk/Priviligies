@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Business Manager - Privilege Management Dashboard</title>
+</head>
+<body>
+    <h1>Business Manager - Privilege Management Dashboard</h1>
+
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<h2>Register a New Privilege</h2>
+<form action="{{ url_for('bus_manager_form') }}" method="POST">
+    <label for="privilege_name">Privilege Name:</label><br>
+    <input type="text" id="privilege_name" name="privilege_name" required><br><br>
+    <button type="submit" name="register">Register</button>
+</form>
+
+<h2>Update Privilege Status</h2>
+<form action="{{ url_for('bus_manager_form') }}" method="POST">
+    <label for="update_privilege_id">Privilege ID to Update:</label><br>
+    <input type="number" id="update_privilege_id" name="privilege_id" required><br>
+    <label for="status">Enter New Status:</label><br>
+    <input type="text" id="status" name="status" required><br><br>
+    <button type="submit" name="update">Update</button>
+</form>
+
+<h2>Delete a Privilege</h2>
+<form action="{{ url_for('bus_manager_form') }}" method="POST">
+    <label for="delete_privilege_id">Privilege ID to Delete:</label><br>
+    <input type="number" id="delete_privilege_id" name="privilege_id" required><br><br>
+    <button type="submit" name="delete">Delete</button>
+</form>
+
+<h2>Show Specific Privilege</h2>
+<form action="{{ url_for('bus_manager_form') }}" method="POST">
+    <label for="show_privilege_id">Privilege ID to Show:</label><br>
+    <input type="number" id="show_privilege_id" name="privilege_id" required><br><br>
+    <button type="submit" name="show">Show</button>
+</form>
+
+<!-- Display all privileges -->
+<h2>Current Privileges</h2>
+<table border="1">
+    <tr>
+        <th>Privilege ID</th>
+        <th>Privilege Name</th>
+        <th>Status</th>
+    </tr>
+    {% for privilege in privileges %}
+    <tr>
+        <td>{{ privilege.privilege_id }}</td>
+        <td>{{ privilege.privilege_name }}</td>
+        <td>{{ privilege.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+    <a href="/">Back to Login</a>
+</body>
+</html>

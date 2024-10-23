@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Form</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.login }}</h1>
+    <p>We are happy to inform you that your privilege is: {{ user.privilege.privilege_name if user.privilege else 'None' }}</p>
+    <a href="/">Back to Login</a>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login Form</h1>
+    <form method="POST">
+        <label for="id_type">Enter ID (1-Employee, 2-Manager, 3-Bus. Manager, 4-User):</label><br>
+        <input type="number" id="id_type" name="id_type" min="1" max="4" required><br><br>
+
+        <label for="login">Login:</label><br>
+        <input type="text" id="login" name="login" required><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

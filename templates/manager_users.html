@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users - Manager Dashboard</title>
+</head>
+<body>
+    <h1>Manage Users and Their Privileges</h1>
+    <table border="1">
+        <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Privilege</th>
+            <th>Action</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.user_id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.privilege.privilege_name if user.privilege else 'None' }}</td>
+            <td>
+                <form action="{{ url_for('update_user_privilege') }}" method="post" style="display:inline;">
+                    <input type="hidden" name="user_id" value="{{ user.user_id }}">
+                    <select name="privilege_id">
+                        <option value="">Select Privilege</option>
+                        {% for priv in privileges %}
+                            <option value="{{ priv.privilege_id }}">{{ priv.privilege_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Update Privilege</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Back to Login</a>
+</body>
+</html>
